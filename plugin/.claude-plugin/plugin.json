@@ -1,0 +1,8 @@
+{
+  "name": "session-bookmarks",
+  "version": "0.1.0",
+  "description": "Bookmark the current Claude Code session and list bookmarks with the cbm CLI",
+  "author": {
+    "name": "Revaz G"
+  }
+}

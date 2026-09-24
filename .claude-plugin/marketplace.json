@@ -1,0 +1,16 @@
+{
+  "name": "claude-bookmarks",
+  "owner": {
+    "name": "Revaz G"
+  },
+  "metadata": {
+    "description": "Local marketplace for the session-bookmarks plugin"
+  },
+  "plugins": [
+    {
+      "name": "session-bookmarks",
+      "source": "./plugin",
+      "description": "Bookmark Claude Code sessions with /bookmark and list them with /bookmarks (needs the cbm CLI on PATH)"
+    }
+  ]
+}
