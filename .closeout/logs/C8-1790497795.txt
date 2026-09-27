@@ -1,0 +1,11 @@
+▶ pin open stale branch
+  ✔ B8 a second open resumes newId without another copy (493.37185ms)
+✔ pin open stale branch (494.392681ms)
+ℹ tests 1
+ℹ suites 1
+ℹ pass 1
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 583.673715

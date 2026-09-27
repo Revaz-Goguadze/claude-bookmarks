@@ -1,0 +1,11 @@
+▶ pin open stale branch
+  ✔ B7 the record is repointed to newId with the copy leaf and a fresh lastOpenedAt, stderr names both ids (332.956034ms)
+✔ pin open stale branch (333.962025ms)
+ℹ tests 1
+ℹ suites 1
+ℹ pass 1
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 420.32951

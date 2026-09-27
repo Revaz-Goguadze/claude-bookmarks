@@ -39,6 +39,8 @@ cbm open "auth fix"
 
 `cbm add` without `--name` uses the session's title or summary, or `session <id prefix>` when that is a slash command. Tags are lowercased and a leading `#` is dropped. `cbm open --fork` resumes into a new forked session, and `cbm open --print-command` prints the `cd ... && claude --resume ...` line instead of running it.
 
+A session file can hold several conversation branches, and `claude --resume` always opens the newest one. `cbm add` therefore pins the branch you are on by storing its last message uuid in the bookmark's `leafUuid` field. When `cbm open` finds that branch is no longer the one Claude would resume, it copies the branch into a new session (the original transcript is left untouched), points the bookmark at the copy and opens that. Bookmarks made before pinning existed have no `leafUuid` and open as before.
+
 When a session file is deleted, its bookmark stays in the store and shows as `missing` in `cbm list`; `cbm open` then exits 4. When the project directory is gone, `cbm open` exits 3 unless you pass `--allow-missing-cwd`, which opens the session from the current directory.
 
 `cbm list --json` and `cbm sessions --json` print one JSON line: `{"ok":true,"data":{...}}` or `{"ok":false,"error":{"code":"...","message":"..."}}`.

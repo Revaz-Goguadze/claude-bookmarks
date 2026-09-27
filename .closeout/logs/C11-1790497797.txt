@@ -1,0 +1,11 @@
+▶ pin open stale branch
+  ✔ B11 --fork on a stale pin runs --resume newId --fork-session (329.514643ms)
+✔ pin open stale branch (330.531866ms)
+ℹ tests 1
+ℹ suites 1
+ℹ pass 1
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 419.986292

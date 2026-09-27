@@ -1,0 +1,11 @@
+▶ pin add
+  ✔ B2 add on a file with branch A then branch B pins the last message of branch B (163.417592ms)
+✔ pin add (164.598833ms)
+ℹ tests 1
+ℹ suites 1
+ℹ pass 1
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 252.334579

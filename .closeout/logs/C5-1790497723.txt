@@ -1,0 +1,39 @@
+▶ pin open stale branch
+  ✖ B5 two-branch open copies the pinned branch to a new session and resumes it (164.475192ms)
+✖ pin open stale branch (165.932881ms)
+ℹ tests 1
+ℹ suites 1
+ℹ pass 0
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 253.253606
+
+✖ failing tests:
+
+test at test/pin.test.ts:203:3
+✖ B5 two-branch open copies the pinned branch to a new session and resumes it (164.475192ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + undefined
+  - '10000000-0000-4000-8000-000000000004'
+  
+      at TestContext.<anonymous> (file:///home/coder/repos/claude-bookmarks-build/test/pin.test.ts:205:12)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at node:internal/test_runner/test:1903:71
+      at node:internal/per_context/primordials:505:82
+      at new Promise (<anonymous>)
+      at new SafePromise (node:internal/per_context/primordials:479:3)
+      at node:internal/per_context/primordials:505:9
+      at Array.map (<anonymous>) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: '10000000-0000-4000-8000-000000000004',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

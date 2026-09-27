@@ -1,0 +1,11 @@
+▶ pin open edge cases
+  ✔ B15 a non-string leafUuid is a corrupt store and the file is untouched (162.179232ms)
+✔ pin open edge cases (163.175434ms)
+ℹ tests 1
+ℹ suites 1
+ℹ pass 1
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 252.762858

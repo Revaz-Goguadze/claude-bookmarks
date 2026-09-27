@@ -4,7 +4,8 @@ import fs from 'node:fs';
 import os from 'node:os';
 import { parseArgs } from 'node:util';
 import type { ParseArgsOptionsConfig } from 'node:util';
-import { getSessionInfo, listSessions } from '@anthropic-ai/claude-agent-sdk';
+import { forkSession, getSessionInfo, listSessions } from '@anthropic-ai/claude-agent-sdk';
+import { currentLeaf, isOnCurrentBranch, newestDescendant } from './branch.ts';
 import { CbmError } from './errors.ts';
 import {
   assertNameFree,
@@ -15,7 +16,7 @@ import {
   resolveSelector,
   saveStore,
 } from './store.ts';
-import type { Bookmark } from './store.ts';
+import type { Bookmark, Store } from './store.ts';
 
 const USAGE = `Usage: cbm <command> [options]
 
@@ -104,7 +105,7 @@ async function add(args: string[]): Promise<void> {
     cwd = process.cwd();
     process.stderr.write(`cbm: warning: session ${id} has no recorded directory; using ${cwd}\n`);
   }
-  store.bookmarks.push({
+  const bookmark: Bookmark = {
     id,
     name,
     tags: normalizeTags(values.tag ?? []),
@@ -112,7 +113,10 @@ async function add(args: string[]): Promise<void> {
     cwd,
     createdAt: new Date().toISOString(),
     lastOpenedAt: null,
-  });
+  };
+  const leafUuid = await currentLeaf(id);
+  if (leafUuid !== undefined) bookmark.leafUuid = leafUuid;
+  store.bookmarks.push(bookmark);
   saveStore(store);
   process.stdout.write(`Bookmarked "${name}" (${id})\n`);
 }
@@ -198,6 +202,30 @@ async function sessions(args: string[], out: Output): Promise<void> {
   }
 }
 
+// Point the bookmark at its pinned branch. A pin that is no longer on the chain
+// `claude --resume` opens is copied, up to its newest descendant, into a new session.
+async function followPin(store: Store, bookmark: Bookmark, leafUuid: string): Promise<void> {
+  const id = bookmark.id;
+  if (await isOnCurrentBranch(id, leafUuid)) return;
+  const target = newestDescendant(id, leafUuid);
+  if (target === undefined) {
+    process.stderr.write(`cbm: warning: pinned message ${leafUuid} is not in session ${id}; opening its latest branch\n`);
+    return;
+  }
+  let newId: string;
+  try {
+    newId = (await forkSession(id, { upToMessageId: target, title: bookmark.name })).sessionId;
+  } catch (err) {
+    throw new CbmError('internal', `could not copy the pinned branch of ${id}: ${(err as Error).message}`);
+  }
+  bookmark.id = newId;
+  const newLeaf = await currentLeaf(newId);
+  if (newLeaf === undefined) delete bookmark.leafUuid;
+  else bookmark.leafUuid = newLeaf;
+  saveStore(store);
+  process.stderr.write(`cbm: "${bookmark.name}" is pinned to an older branch of ${id}; copied it to new session ${newId}\n`);
+}
+
 async function open(args: string[]): Promise<void> {
   const { values, positionals } = parse(
     args,
@@ -217,6 +245,7 @@ async function open(args: string[]): Promise<void> {
     cwd = process.cwd();
     process.stderr.write(`cbm: warning: project directory ${bookmark.cwd} no longer exists; opening in ${cwd}\n`);
   }
+  if (bookmark.leafUuid !== undefined) await followPin(store, bookmark, bookmark.leafUuid);
   const bin = process.env.CBM_CLAUDE_BIN || 'claude';
   const claudeArgs = ['--resume', bookmark.id];
   if (values.fork) claudeArgs.push('--fork-session');

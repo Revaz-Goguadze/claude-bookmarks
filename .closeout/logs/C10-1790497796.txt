@@ -1,0 +1,11 @@
+▶ pin open stale branch
+  ✔ B10 --print-command copies, repoints and prints the newId line, and repeats without a third copy (478.773759ms)
+✔ pin open stale branch (479.792946ms)
+ℹ tests 1
+ℹ suites 1
+ℹ pass 1
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 566.155178

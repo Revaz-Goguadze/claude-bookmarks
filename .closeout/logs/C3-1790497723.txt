@@ -1,0 +1,11 @@
+▶ pin open current branch
+  ✔ B3 a record without leafUuid resumes id, copies nothing and keeps the key absent (158.542997ms)
+✔ pin open current branch (159.881263ms)
+ℹ tests 1
+ℹ suites 1
+ℹ pass 1
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 249.904518

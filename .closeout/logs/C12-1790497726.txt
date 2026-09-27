@@ -1,0 +1,38 @@
+▶ pin open edge cases
+  ✖ B12 a pin absent from the file warns and resumes id without copying (161.663687ms)
+✖ pin open edge cases (162.656486ms)
+ℹ tests 1
+ℹ suites 1
+ℹ pass 0
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 251.920894
+
+✖ failing tests:
+
+test at test/pin.test.ts:306:3
+✖ B12 a pin absent from the file warns and resumes id without copying (161.663687ms)
+  AssertionError [ERR_ASSERTION]: cbm: bookmark store /tmp/cbm-test-0EKPXr/store/bookmarks.json has a malformed record at index 0; fix or move it aside
+  
+  
+  1 !== 0
+  
+      at TestContext.<anonymous> (file:///home/coder/repos/claude-bookmarks-build/test/pin.test.ts:311:12)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at node:internal/test_runner/test:1903:71
+      at node:internal/per_context/primordials:505:82
+      at new Promise (<anonymous>)
+      at new SafePromise (node:internal/per_context/primordials:479:3)
+      at node:internal/per_context/primordials:505:9
+      at Array.map (<anonymous>) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 1,
+    expected: 0,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

@@ -1,0 +1,47 @@
+▶ pin add
+  ✖ B1 add on a writeSession fixture stores leafUuid a1 and list --json shows it (161.703779ms)
+✖ pin add (163.043157ms)
+ℹ tests 1
+ℹ suites 1
+ℹ pass 0
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 250.785162
+
+✖ failing tests:
+
+test at test/pin.test.ts:139:3
+✖ B1 add on a writeSession fixture stores leafUuid a1 and list --json shows it (161.703779ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  
+    {
+      createdAt: '2026-09-27T08:28:42.998Z',
+      cwd: '/tmp/cbm-test-wivi9F/projects/auth-service',
+      id: '3f2a9c1e-5b7d-4e8a-9c0f-1a2b3c4d5e6f',
+      lastOpenedAt: null,
+  -   leafUuid: 'a1',
+      name: 'Auth fix',
+      note: '',
+      tags: []
+    }
+  
+      at TestContext.<anonymous> (file:///home/coder/repos/claude-bookmarks-build/test/pin.test.ts:145:12)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at node:internal/test_runner/test:1903:71
+      at node:internal/per_context/primordials:505:82
+      at new Promise (<anonymous>)
+      at new SafePromise (node:internal/per_context/primordials:479:3)
+      at node:internal/per_context/primordials:505:9
+      at Array.map (<anonymous>) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: { id: '3f2a9c1e-5b7d-4e8a-9c0f-1a2b3c4d5e6f', name: 'Auth fix', tags: [], note: '', cwd: '/tmp/cbm-test-wivi9F/projects/auth-service', createdAt: '2026-09-27T08:28:42.998Z', lastOpenedAt: null },
+    expected: { id: '3f2a9c1e-5b7d-4e8a-9c0f-1a2b3c4d5e6f', name: 'Auth fix', tags: [], note: '', cwd: '/tmp/cbm-test-wivi9F/projects/auth-service', createdAt: '2026-09-27T08:28:42.998Z', lastOpenedAt: null, leafUuid: 'a1' },
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }

@@ -1,0 +1,617 @@
+▶ C3 add errors
+  ✔ add not-a-uuid exits 2 and creates no store (334.967349ms)
+  ✔ add not-a-uuid with an existing store leaves it byte-identical (617.267271ms)
+  ✔ add of an unknown session uuid exits 4 and creates no store (300.553181ms)
+  ✔ add of an unknown session uuid with an existing store leaves it byte-identical (501.022656ms)
+  ✔ re-adding an already bookmarked session exits 6 and leaves the store byte-identical (423.688989ms)
+  ✔ re-adding a bookmarked session given in uppercase exits 6 (404.332486ms)
+  ✔ a new session named AUTH FIX when Auth fix exists exits 6 and leaves the store byte-identical (363.40036ms)
+  ✔ a name containing an ESC control char exits 2 and leaves the store byte-identical (351.97559ms)
+  ✔ a name containing an ESC control char on no store exits 2 and creates no store (177.1422ms)
+✔ C3 add errors (3476.664806ms)
+▶ C2 add
+  ✖ add with uppercase uuid, name, tags and note stores one normalized record (312.339104ms)
+  ✔ store file is pretty-printed JSON with mode 0600 and the store dir holds no other file (283.805909ms)
+  ✖ add of a second session without --name stores the SDK summary as the name (628.181142ms)
+✖ C2 add (1225.736626ms)
+▶ C1 cli
+  ✔ package.json is an ES module with the cbm bin and only the pinned SDK dependency (1.644899ms)
+  ✔ src/cli.ts starts with a node shebang (0.2299ms)
+  ✔ --help exits 0 and names all six commands on stdout (318.10059ms)
+  ✔ unknown command frob exits 2 with a cbm: error on stderr (288.137407ms)
+  ✔ unknown flag is a usage error exiting 2 (285.165382ms)
+  ✔ no arguments prints usage naming the commands on stderr and exits 2 (321.234631ms)
+✔ C1 cli (1216.252678ms)
+▶ R1 default name
+  ✔ a session whose summary is a slash command gets "session <id prefix>" instead (298.500745ms)
+  ✔ a normal prompt summary is still used as the name (304.783553ms)
+✔ R1 default name (604.489154ms)
+▶ C12 edit
+  ✔ --name renames the bookmark (926.278234ms)
+  ✔ --add-tag "#New" adds the normalized tag new (820.547356ms)
+  ✔ --rm-tag auth removes that tag (613.988347ms)
+  ✔ --note "" clears the note (568.590241ms)
+  ✔ renaming onto another bookmark name in other case exits 6 and leaves the store byte-identical (522.191253ms)
+  ✔ edit with no change flag exits 2 and leaves the store byte-identical (491.760582ms)
+  ✔ edit leaves the other bookmark untouched (498.339758ms)
+✔ C12 edit (4443.240351ms)
+▶ C14 json errors
+  ✔ list --json on a corrupt store prints one store_corrupt error line and exits 1 (351.555456ms)
+  ✔ sessions --json --limit abc prints one usage error line and exits 2 (290.187155ms)
+  ✔ list --json on an empty store prints ok:true with no bookmarks (311.938447ms)
+  ✔ list --json with no store prints ok:true with no bookmarks and creates no store (296.097669ms)
+✔ C14 json errors (1251.301147ms)
+▶ C6 list json
+  ✖ list --json returns ok:true with every documented bookmark field (935.451968ms)
+  ✖ a bookmark whose session .jsonl was deleted shows missing with null summary and stays in the store (807.598433ms)
+✖ C6 list json (1744.504223ms)
+▶ C5 list
+  ✔ each line shows name, [tags], ready, age and cwd (1167.158133ms)
+  ✔ query REFRESH matches by summary, tag, note word and name case-insensitively (1344.41487ms)
+  ✔ --tag filters to bookmarks carrying that tag (893.156937ms)
+  ✔ order is by max(lastOpenedAt, createdAt) descending (1259.689156ms)
+  ✔ no store prints a hint containing cbm add (165.04151ms)
+  ✔ an empty store prints a hint containing cbm add (160.41077ms)
+✔ C5 list (4992.659015ms)
+▶ C9 open errors
+  ✔ removed bookmark cwd exits 3 naming the cwd and --allow-missing-cwd without running claude (616.405675ms)
+  ✔ --allow-missing-cwd runs claude in cbm own cwd and warns on stderr (633.311217ms)
+  ✔ removed session .jsonl exits 4 without running claude and leaves lastOpenedAt unchanged (710.580099ms)
+  ✔ removed session .jsonl on a never-opened bookmark exits 4 and lastOpenedAt stays null (403.336556ms)
+  ✔ CBM_CLAUDE_BIN pointing at a nonexistent path exits 127 and leaves lastOpenedAt unchanged (402.745882ms)
+✔ C9 open errors (2768.525485ms)
+▶ C7 open
+  ✔ open "auth FIX" runs the claude bin with --resume <uuid> in the bookmark cwd and exits with its code (596.278461ms)
+  ✔ open leaves every other record field unchanged (625.785838ms)
+  ✔ --fork adds --fork-session after the uuid (502.200992ms)
+✔ C7 open (1725.587477ms)
+▶ pin add
+  ✖ B1 add on a writeSession fixture stores leafUuid a1 and list --json shows it (315.744199ms)
+  ✖ B2 add on a file with branch A then branch B pins the last message of branch B (280.407926ms)
+✖ pin add (597.208212ms)
+▶ pin open current branch
+  ✔ B3 a record without leafUuid resumes id, copies nothing and keeps the key absent (311.160521ms)
+  ✖ B4 pin at a4 with a continuation under a4 resumes id and leaves id and leafUuid unchanged (306.273001ms)
+✖ pin open current branch (617.76986ms)
+▶ pin open stale branch
+  ✖ B5 two-branch open copies the pinned branch to a new session and resumes it (262.82879ms)
+  ✖ B6 the copied file carries newId, the A branch texts, forkedFrom a4, the bookmark title and mode 0600 (474.718436ms)
+  ✖ B7 the record is repointed to newId with the copy leaf and a fresh lastOpenedAt, stderr names both ids (406.681758ms)
+  ✖ B8 a second open resumes newId without another copy (389.836632ms)
+  ✖ B9 a pin with a continuation under it and a later branch B copies up to the newest descendant a8 (363.670134ms)
+  ✖ B10 --print-command copies, repoints and prints the newId line, and repeats without a third copy (351.300775ms)
+  ✖ B11 --fork on a stale pin runs --resume newId --fork-session (341.0025ms)
+✖ pin open stale branch (2590.68164ms)
+▶ pin open edge cases
+  ✖ B12 a pin absent from the file warns and resumes id without copying (168.619442ms)
+  ✔ B13 a removed bookmark cwd exits 3 before any copy and leaves the store byte-identical (332.939495ms)
+  ✖ B14 a failed copy exits 1 with a cbm error, runs nothing and writes nothing (325.726484ms)
+  ✔ B15 a non-string leafUuid is a corrupt store and the file is untouched (162.702902ms)
+  ✖ B16 README documents the leafUuid store field (3.031185ms)
+✖ pin open edge cases (993.363931ms)
+▶ C15 plugin
+  ✔ plugin.json has name session-bookmarks, version 0.1.0, a description and author Revaz G (1.946234ms)
+  ✔ bookmark.md frontmatter allows cbm and its body adds the current session from $ARGUMENTS (0.54481ms)
+  ✔ bookmarks.md frontmatter allows cbm and its body runs cbm list $ARGUMENTS (0.317535ms)
+  ✔ claude plugin validate plugin exits 0 with Validation passed (652.962607ms)
+✔ C15 plugin (657.430782ms)
+▶ C8 print command
+  ✔ --print-command prints the exact cd and resume line without running claude or touching lastOpenedAt (602.686649ms)
+  ✔ --print-command with --fork appends --fork-session (593.378624ms)
+  ✔ with CBM_CLAUDE_BIN unset the bin part is quoted claude (503.148095ms)
+  ✔ an embedded single quote in the cwd is written as a closed, escaped and reopened quote (406.350879ms)
+✔ C8 print command (2109.194905ms)
+▶ C16 readme
+  ✔ README.md mentions npm i --omit=optional (1.525807ms)
+  ✔ README.md mentions npm link (0.209062ms)
+  ✔ README.md mentions --plugin-dir (0.201377ms)
+  ✔ README.md mentions /bookmark (0.175519ms)
+  ✔ README.md mentions /bookmarks (0.163196ms)
+  ✔ README.md mentions CBM_STORE (0.222056ms)
+  ✔ README.md mentions CBM_CLAUDE_BIN (0.133039ms)
+  ✔ README.md mentions cbm add (0.148799ms)
+  ✔ README.md mentions cbm list (0.356547ms)
+  ✔ README.md mentions cbm open (0.221524ms)
+  ✔ README.md mentions cbm sessions (0.145563ms)
+  ✔ README.md mentions cbm edit (0.266629ms)
+  ✔ README.md mentions cbm remove (0.100658ms)
+✔ C16 readme (6.443013ms)
+▶ C13 remove
+  ✔ remove "auth fix" drops only that record and leaves its .jsonl byte-identical (884.001621ms)
+  ✔ remove nosuch exits 5 and leaves the store byte-identical (804.766131ms)
+✔ C13 remove (1689.924478ms)
+▶ C10 select
+  ✔ exact name in any case resolves to its uuid (1862.500007ms)
+  ✔ full uuid resolves to that bookmark (783.644317ms)
+  ✔ a unique 8-char uuid prefix resolves in either case (882.123253ms)
+  ✔ an 8-char prefix shared by two bookmarks exits 2 listing both candidates and prints nothing on stdout (659.421569ms)
+  ✔ a 7-char prefix exits 5 (647.345557ms)
+  ✔ an unknown name exits 5 (630.975294ms)
+✔ C10 select (5467.537748ms)
+▶ C11 sessions
+  ✔ sessions --json lists all sessions newest first with documented fields and bookmark info (567.671936ms)
+  ✔ query refresh filters sessions by summary (704.921133ms)
+  ✔ --limit 1 returns only the newest session (401.904414ms)
+  ✔ human output shows [bookmarked: Auth fix] only on the bookmarked session line (386.553826ms)
+  ✔ --limit 0 is a usage error exiting 2 (348.128387ms)
+  ✔ --limit abc is a usage error exiting 2 (349.562952ms)
+✔ C11 sessions (2760.244981ms)
+▶ C4 store
+  ✔ with CBM_STORE unset add writes $CLAUDE_CONFIG_DIR/bookmarks.json (299.499759ms)
+  ✔ with CBM_STORE and CLAUDE_CONFIG_DIR unset add writes $HOME/.claude/bookmarks.json (269.526673ms)
+  ✔ list with no store exits 0 and creates no file (259.436016ms)
+  ✔ list with CBM_STORE unset and no store creates no bookmarks.json in the config dir (226.144808ms)
+  ✔ list on a store with invalid JSON exits 1 mentioning store and leaves it byte-identical (211.722366ms)
+  ✔ add on a store with invalid JSON exits 1 mentioning store and leaves it byte-identical (198.892997ms)
+  ✔ list on a store with version 2 exits 1 mentioning store and leaves it byte-identical (195.702412ms)
+  ✔ add on a store with version 2 exits 1 mentioning store and leaves it byte-identical (203.47978ms)
+✔ C4 store (1866.137183ms)
+ℹ tests 106
+ℹ suites 21
+ℹ pass 89
+ℹ fail 17
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 5798.466015
+
+✖ failing tests:
+
+test at test/add.test.ts:25:3
+✖ add with uppercase uuid, name, tags and note stores one normalized record (312.339104ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  
+    {
+      bookmarks: [
+        {
+          createdAt: '2026-09-27T08:28:48.882Z',
+          cwd: '/tmp/cbm-test-vYResF/projects/auth-service',
+          id: '3f2a9c1e-5b7d-4e8a-9c0f-1a2b3c4d5e6f',
+          lastOpenedAt: null,
+  -       leafUuid: 'a1',
+          name: 'Auth fix',
+          note: 'check refresh',
+          tags: [
+            'auth',
+            'urgent'
+  
+      at TestContext.<anonymous> (file:///home/coder/repos/claude-bookmarks-build/test/add.test.ts:39:12)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at node:internal/test_runner/test:1903:71
+      at node:internal/per_context/primordials:505:82
+      at new Promise (<anonymous>)
+      at new SafePromise (node:internal/per_context/primordials:479:3)
+      at node:internal/per_context/primordials:505:9
+      at Array.map (<anonymous>) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: { version: 1, bookmarks: [ [Object] ] },
+    expected: { version: 1, bookmarks: [ [Object] ] },
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at test/add.test.ts:67:3
+✖ add of a second session without --name stores the SDK summary as the name (628.181142ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  
+    {
+      createdAt: '2026-09-27T08:28:49.500Z',
+      cwd: '/tmp/cbm-test-tmN46U/projects/auth-service',
+      id: '3f2a9c1e-5b7d-4e8a-9c0f-1a2b3c4d5e6f',
+      lastOpenedAt: null,
+  -   leafUuid: 'a1',
+      name: 'Auth fix',
+      note: '',
+      tags: []
+    }
+  
+      at TestContext.<anonymous> (file:///home/coder/repos/claude-bookmarks-build/test/add.test.ts:82:12)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Suite.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: { id: '3f2a9c1e-5b7d-4e8a-9c0f-1a2b3c4d5e6f', name: 'Auth fix', tags: [], note: '', cwd: '/tmp/cbm-test-tmN46U/projects/auth-service', createdAt: '2026-09-27T08:28:49.500Z', lastOpenedAt: null },
+    expected: { id: '3f2a9c1e-5b7d-4e8a-9c0f-1a2b3c4d5e6f', name: 'Auth fix', tags: [], note: '', cwd: '/tmp/cbm-test-tmN46U/projects/auth-service', createdAt: '2026-09-27T08:28:49.500Z', lastOpenedAt: null, leafUuid: 'a1' },
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at test/list-json.test.ts:36:3
+✖ list --json returns ok:true with every documented bookmark field (935.451968ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  ... Skipped lines
+  
+    {
+      data: {
+        bookmarks: [
+          {
+            createdAt: '2026-09-27T08:28:49.238Z',
+  ...
+            lastOpenedAt: null,
+  -         leafUuid: 'a1',
+            name: 'Docs pass',
+            note: '',
+            status: 'ready',
+            summary: 'write docs for install',
+            tags: [
+  ...
+            lastOpenedAt: null,
+  -         leafUuid: 'a1',
+            name: 'Auth fix',
+            note: 'check refresh',
+            status: 'ready',
+            summary: 'fix the auth refresh bug',
+            tags: [
+  
+      at TestContext.<anonymous> (file:///home/coder/repos/claude-bookmarks-build/test/list-json.test.ts:42:12)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at node:internal/test_runner/test:1903:71
+      at node:internal/per_context/primordials:505:82
+      at new Promise (<anonymous>)
+      at new SafePromise (node:internal/per_context/primordials:479:3)
+      at node:internal/per_context/primordials:505:9
+      at Array.map (<anonymous>) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: { ok: true, data: { bookmarks: [Array] } },
+    expected: { ok: true, data: { bookmarks: [Array] } },
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at test/list-json.test.ts:75:3
+✖ a bookmark whose session .jsonl was deleted shows missing with null summary and stays in the store (807.598433ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  
+    {
+      createdAt: '2026-09-27T08:28:50.123Z',
+      cwd: '/tmp/cbm-test-6zIbde/projects/docs-site',
+      id: '7c4e1a9b-2d3f-4a5b-8c6d-9e0f1a2b3c4d',
+      lastOpenedAt: null,
+  -   leafUuid: 'a1',
+      name: 'Docs pass',
+      note: '',
+      status: 'missing',
+      summary: null,
+      tags: [
+  
+      at TestContext.<anonymous> (file:///home/coder/repos/claude-bookmarks-build/test/list-json.test.ts:85:12)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Suite.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Promise.all (index 0)
+      at async Suite.run (node:internal/test_runner/test:1905:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: { id: '7c4e1a9b-2d3f-4a5b-8c6d-9e0f1a2b3c4d', name: 'Docs pass', tags: [ 'docs' ], note: '', cwd: '/tmp/cbm-test-6zIbde/projects/docs-site', createdAt: '2026-09-27T08:28:50.123Z', lastOpenedAt: null, status: 'missing', summary: null },
+    expected: { id: '7c4e1a9b-2d3f-4a5b-8c6d-9e0f1a2b3c4d', name: 'Docs pass', tags: [ 'docs' ], note: '', cwd: '/tmp/cbm-test-6zIbde/projects/docs-site', createdAt: '2026-09-27T08:28:50.123Z', lastOpenedAt: null, leafUuid: 'a1', status: 'missing', summary: null },
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at test/pin.test.ts:139:3
+✖ B1 add on a writeSession fixture stores leafUuid a1 and list --json shows it (315.744199ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  
+    {
+      createdAt: '2026-09-27T08:28:48.944Z',
+      cwd: '/tmp/cbm-test-0odc7d/projects/auth-service',
+      id: '3f2a9c1e-5b7d-4e8a-9c0f-1a2b3c4d5e6f',
+      lastOpenedAt: null,
+  -   leafUuid: 'a1',
+      name: 'Auth fix',
+      note: '',
+      tags: []
+    }
+  
+      at TestContext.<anonymous> (file:///home/coder/repos/claude-bookmarks-build/test/pin.test.ts:145:12)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at node:internal/test_runner/test:1903:71
+      at node:internal/per_context/primordials:505:82
+      at new Promise (<anonymous>)
+      at new SafePromise (node:internal/per_context/primordials:479:3)
+      at node:internal/per_context/primordials:505:9
+      at Array.map (<anonymous>) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: { id: '3f2a9c1e-5b7d-4e8a-9c0f-1a2b3c4d5e6f', name: 'Auth fix', tags: [], note: '', cwd: '/tmp/cbm-test-0odc7d/projects/auth-service', createdAt: '2026-09-27T08:28:48.944Z', lastOpenedAt: null },
+    expected: { id: '3f2a9c1e-5b7d-4e8a-9c0f-1a2b3c4d5e6f', name: 'Auth fix', tags: [], note: '', cwd: '/tmp/cbm-test-0odc7d/projects/auth-service', createdAt: '2026-09-27T08:28:48.944Z', lastOpenedAt: null, leafUuid: 'a1' },
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at test/pin.test.ts:163:3
+✖ B2 add on a file with branch A then branch B pins the last message of branch B (280.407926ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + undefined
+  - '10000000-0000-4000-8000-000000000006'
+  
+      at TestContext.<anonymous> (file:///home/coder/repos/claude-bookmarks-build/test/pin.test.ts:167:12)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Suite.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Promise.all (index 0)
+      at async Suite.run (node:internal/test_runner/test:1905:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: '10000000-0000-4000-8000-000000000006',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at test/pin.test.ts:187:3
+✖ B4 pin at a4 with a continuation under a4 resumes id and leaves id and leafUuid unchanged (306.273001ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + undefined
+  - '10000000-0000-4000-8000-000000000004'
+  
+      at TestContext.<anonymous> (file:///home/coder/repos/claude-bookmarks-build/test/pin.test.ts:190:12)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Suite.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Promise.all (index 0)
+      at async Suite.run (node:internal/test_runner/test:1905:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: '10000000-0000-4000-8000-000000000004',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at test/pin.test.ts:203:3
+✖ B5 two-branch open copies the pinned branch to a new session and resumes it (262.82879ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + undefined
+  - '10000000-0000-4000-8000-000000000004'
+  
+      at TestContext.<anonymous> (file:///home/coder/repos/claude-bookmarks-build/test/pin.test.ts:205:12)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at node:internal/test_runner/test:1903:71
+      at node:internal/per_context/primordials:505:82
+      at new Promise (<anonymous>)
+      at new SafePromise (node:internal/per_context/primordials:479:3)
+      at node:internal/per_context/primordials:505:9
+      at Array.map (<anonymous>) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: '10000000-0000-4000-8000-000000000004',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at test/pin.test.ts:217:3
+✖ B6 the copied file carries newId, the A branch texts, forkedFrom a4, the bookmark title and mode 0600 (474.718436ms)
+  AssertionError [ERR_ASSERTION]: expected one copied session, got 
+  
+  0 !== 1
+  
+      at newIdOf (file:///home/coder/repos/claude-bookmarks-build/test/pin.test.ts:105:10)
+      at TestContext.<anonymous> (file:///home/coder/repos/claude-bookmarks-build/test/pin.test.ts:221:19)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Suite.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Promise.all (index 0)
+      at async Suite.run (node:internal/test_runner/test:1905:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at test/pin.test.ts:236:3
+✖ B7 the record is repointed to newId with the copy leaf and a fresh lastOpenedAt, stderr names both ids (406.681758ms)
+  AssertionError [ERR_ASSERTION]: expected one copied session, got 
+  
+  0 !== 1
+  
+      at newIdOf (file:///home/coder/repos/claude-bookmarks-build/test/pin.test.ts:105:10)
+      at TestContext.<anonymous> (file:///home/coder/repos/claude-bookmarks-build/test/pin.test.ts:243:19)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Suite.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at test/pin.test.ts:254:3
+✖ B8 a second open resumes newId without another copy (389.836632ms)
+  AssertionError [ERR_ASSERTION]: expected one copied session, got 
+  
+  0 !== 1
+  
+      at newIdOf (file:///home/coder/repos/claude-bookmarks-build/test/pin.test.ts:105:10)
+      at TestContext.<anonymous> (file:///home/coder/repos/claude-bookmarks-build/test/pin.test.ts:257:19)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Suite.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at test/pin.test.ts:266:3
+✖ B9 a pin with a continuation under it and a later branch B copies up to the newest descendant a8 (363.670134ms)
+  AssertionError [ERR_ASSERTION]: expected one copied session, got 
+  
+  0 !== 1
+  
+      at newIdOf (file:///home/coder/repos/claude-bookmarks-build/test/pin.test.ts:105:10)
+      at TestContext.<anonymous> (file:///home/coder/repos/claude-bookmarks-build/test/pin.test.ts:272:19)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Suite.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at test/pin.test.ts:279:3
+✖ B10 --print-command copies, repoints and prints the newId line, and repeats without a third copy (351.300775ms)
+  AssertionError [ERR_ASSERTION]: expected one copied session, got 
+  
+  0 !== 1
+  
+      at newIdOf (file:///home/coder/repos/claude-bookmarks-build/test/pin.test.ts:105:10)
+      at TestContext.<anonymous> (file:///home/coder/repos/claude-bookmarks-build/test/pin.test.ts:283:19)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Suite.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at test/pin.test.ts:296:3
+✖ B11 --fork on a stale pin runs --resume newId --fork-session (341.0025ms)
+  AssertionError [ERR_ASSERTION]: expected one copied session, got 
+  
+  0 !== 1
+  
+      at newIdOf (file:///home/coder/repos/claude-bookmarks-build/test/pin.test.ts:105:10)
+      at TestContext.<anonymous> (file:///home/coder/repos/claude-bookmarks-build/test/pin.test.ts:300:19)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Suite.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at test/pin.test.ts:306:3
+✖ B12 a pin absent from the file warns and resumes id without copying (168.619442ms)
+  AssertionError [ERR_ASSERTION]: cbm: bookmark store /tmp/cbm-test-GzYfzN/store/bookmarks.json has a malformed record at index 0; fix or move it aside
+  
+  
+  1 !== 0
+  
+      at TestContext.<anonymous> (file:///home/coder/repos/claude-bookmarks-build/test/pin.test.ts:311:12)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at node:internal/test_runner/test:1903:71
+      at node:internal/per_context/primordials:505:82
+      at new Promise (<anonymous>)
+      at new SafePromise (node:internal/per_context/primordials:479:3)
+      at node:internal/per_context/primordials:505:9
+      at Array.map (<anonymous>) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 1,
+    expected: 0,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at test/pin.test.ts:330:3
+✖ B14 a failed copy exits 1 with a cbm error, runs nothing and writes nothing (325.726484ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  0 !== 1
+  
+      at TestContext.<anonymous> (file:///home/coder/repos/claude-bookmarks-build/test/pin.test.ts:340:14)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Suite.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at test/pin.test.ts:359:3
+✖ B16 README documents the leafUuid store field (3.031185ms)
+  AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+  
+    assert.ok(fs.readFileSync(path.join(ROOT, 'README.md'), 'utf8').includes('leafUuid'))
+  
+      at TestContext.<anonymous> (file:///home/coder/repos/claude-bookmarks-build/test/pin.test.ts:360:12)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Suite.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }

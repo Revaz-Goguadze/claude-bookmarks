@@ -1,0 +1,37 @@
+▶ pin open stale branch
+  ✖ B11 --fork on a stale pin runs --resume newId --fork-session (320.209022ms)
+✖ pin open stale branch (321.23377ms)
+ℹ tests 1
+ℹ suites 1
+ℹ pass 0
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 411.461954
+
+✖ failing tests:
+
+test at test/pin.test.ts:296:3
+✖ B11 --fork on a stale pin runs --resume newId --fork-session (320.209022ms)
+  AssertionError [ERR_ASSERTION]: expected one copied session, got 
+  
+  0 !== 1
+  
+      at newIdOf (file:///home/coder/repos/claude-bookmarks-build/test/pin.test.ts:105:10)
+      at TestContext.<anonymous> (file:///home/coder/repos/claude-bookmarks-build/test/pin.test.ts:300:19)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at node:internal/test_runner/test:1903:71
+      at node:internal/per_context/primordials:505:82
+      at new Promise (<anonymous>)
+      at new SafePromise (node:internal/per_context/primordials:479:3)
+      at node:internal/per_context/primordials:505:9 {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

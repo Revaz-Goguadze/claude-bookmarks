@@ -11,6 +11,8 @@ export interface Bookmark {
   cwd: string;
   createdAt: string;
   lastOpenedAt: string | null;
+  // The last message of the branch being worked on when the bookmark was made.
+  leafUuid?: string;
 }
 
 export interface Store {
@@ -31,9 +33,10 @@ function storePath(): string {
 function isBookmark(value: unknown): value is Bookmark {
   if (typeof value !== 'object' || value === null || Array.isArray(value)) return false;
   const r = value as Record<string, unknown>;
-  const keys = Object.keys(r).sort().join(',');
+  const keys = Object.keys(r).filter((k) => k !== 'leafUuid').sort().join(',');
   return (
     keys === 'createdAt,cwd,id,lastOpenedAt,name,note,tags' &&
+    (r.leafUuid === undefined || typeof r.leafUuid === 'string') &&
     typeof r.id === 'string' &&
     typeof r.name === 'string' &&
     Array.isArray(r.tags) &&

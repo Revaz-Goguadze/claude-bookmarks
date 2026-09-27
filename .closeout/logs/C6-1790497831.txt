@@ -1,0 +1,11 @@
+▶ pin open stale branch
+  ✔ B6 the copied file carries newId, the A branch texts, forkedFrom a4, the bookmark title and mode 0600 (328.401728ms)
+✔ pin open stale branch (329.427256ms)
+ℹ tests 1
+ℹ suites 1
+ℹ pass 1
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 415.690068

@@ -1,0 +1,11 @@
+▶ pin open edge cases
+  ✔ B13 a removed bookmark cwd exits 3 before any copy and leaves the store byte-identical (321.565937ms)
+✔ pin open edge cases (322.536502ms)
+ℹ tests 1
+ℹ suites 1
+ℹ pass 1
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 413.111172

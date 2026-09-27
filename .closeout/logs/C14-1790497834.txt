@@ -1,0 +1,11 @@
+▶ pin open edge cases
+  ✔ B14 a failed copy exits 1 with a cbm error, runs nothing and writes nothing (331.091165ms)
+✔ pin open edge cases (332.068544ms)
+ℹ tests 1
+ℹ suites 1
+ℹ pass 1
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 419.89277

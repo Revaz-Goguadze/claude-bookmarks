@@ -1,0 +1,11 @@
+▶ pin open edge cases
+  ✔ B12 a pin absent from the file warns and resumes id without copying (165.128871ms)
+✔ pin open edge cases (166.103634ms)
+ℹ tests 1
+ℹ suites 1
+ℹ pass 1
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 252.261484

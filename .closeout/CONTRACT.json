@@ -34,8 +34,14 @@
       "proof": "node --test --test-reporter=spec --test-name-pattern='^B1 ' test/pin.test.ts",
       "expect": "✔ B1 ",
       "artifact": "test/pin.test.ts",
-      "passes": false,
-      "evidence": null
+      "passes": true,
+      "evidence": {
+        "exit": 0,
+        "log": ".closeout/logs/C1-1790497829.txt",
+        "expect_ok": true,
+        "artifact_ok": true,
+        "ts": 1790497829
+      }
     },
     {
       "id": "C2",
@@ -43,8 +49,14 @@
       "proof": "node --test --test-reporter=spec --test-name-pattern='^B2 ' test/pin.test.ts",
       "expect": "✔ B2 ",
       "artifact": "test/pin.test.ts",
-      "passes": false,
-      "evidence": null
+      "passes": true,
+      "evidence": {
+        "exit": 0,
+        "log": ".closeout/logs/C2-1790497829.txt",
+        "expect_ok": true,
+        "artifact_ok": true,
+        "ts": 1790497829
+      }
     },
     {
       "id": "C3",
@@ -52,8 +64,14 @@
       "proof": "node --test --test-reporter=spec --test-name-pattern='^B3 ' test/pin.test.ts",
       "expect": "✔ B3 ",
       "artifact": "test/pin.test.ts",
-      "passes": false,
-      "evidence": null
+      "passes": true,
+      "evidence": {
+        "exit": 0,
+        "log": ".closeout/logs/C3-1790497829.txt",
+        "expect_ok": true,
+        "artifact_ok": true,
+        "ts": 1790497830
+      }
     },
     {
       "id": "C4",
@@ -61,8 +79,14 @@
       "proof": "node --test --test-reporter=spec --test-name-pattern='^B4 ' test/pin.test.ts",
       "expect": "✔ B4 ",
       "artifact": "test/pin.test.ts",
-      "passes": false,
-      "evidence": null
+      "passes": true,
+      "evidence": {
+        "exit": 0,
+        "log": ".closeout/logs/C4-1790497830.txt",
+        "expect_ok": true,
+        "artifact_ok": true,
+        "ts": 1790497830
+      }
     },
     {
       "id": "C5",
@@ -70,8 +94,14 @@
       "proof": "node --test --test-reporter=spec --test-name-pattern='^B5 ' test/pin.test.ts",
       "expect": "✔ B5 ",
       "artifact": "test/pin.test.ts",
-      "passes": false,
-      "evidence": null
+      "passes": true,
+      "evidence": {
+        "exit": 0,
+        "log": ".closeout/logs/C5-1790497830.txt",
+        "expect_ok": true,
+        "artifact_ok": true,
+        "ts": 1790497831
+      }
     },
     {
       "id": "C6",
@@ -79,8 +109,14 @@
       "proof": "node --test --test-reporter=spec --test-name-pattern='^B6 ' test/pin.test.ts",
       "expect": "✔ B6 ",
       "artifact": "test/pin.test.ts",
-      "passes": false,
-      "evidence": null
+      "passes": true,
+      "evidence": {
+        "exit": 0,
+        "log": ".closeout/logs/C6-1790497831.txt",
+        "expect_ok": true,
+        "artifact_ok": true,
+        "ts": 1790497831
+      }
     },
     {
       "id": "C7",
@@ -88,8 +124,14 @@
       "proof": "node --test --test-reporter=spec --test-name-pattern='^B7 ' test/pin.test.ts",
       "expect": "✔ B7 ",
       "artifact": "test/pin.test.ts",
-      "passes": false,
-      "evidence": null
+      "passes": true,
+      "evidence": {
+        "exit": 0,
+        "log": ".closeout/logs/C7-1790497831.txt",
+        "expect_ok": true,
+        "artifact_ok": true,
+        "ts": 1790497831
+      }
     },
     {
       "id": "C8",
@@ -97,8 +139,14 @@
       "proof": "node --test --test-reporter=spec --test-name-pattern='^B8 ' test/pin.test.ts",
       "expect": "✔ B8 ",
       "artifact": "test/pin.test.ts",
-      "passes": false,
-      "evidence": null
+      "passes": true,
+      "evidence": {
+        "exit": 0,
+        "log": ".closeout/logs/C8-1790497831.txt",
+        "expect_ok": true,
+        "artifact_ok": true,
+        "ts": 1790497832
+      }
     },
     {
       "id": "C9",
@@ -106,8 +154,14 @@
       "proof": "node --test --test-reporter=spec --test-name-pattern='^B9 ' test/pin.test.ts",
       "expect": "✔ B9 ",
       "artifact": "test/pin.test.ts",
-      "passes": false,
-      "evidence": null
+      "passes": true,
+      "evidence": {
+        "exit": 0,
+        "log": ".closeout/logs/C9-1790497832.txt",
+        "expect_ok": true,
+        "artifact_ok": true,
+        "ts": 1790497833
+      }
     },
     {
       "id": "C10",
@@ -115,8 +169,14 @@
       "proof": "node --test --test-reporter=spec --test-name-pattern='^B10 ' test/pin.test.ts",
       "expect": "✔ B10 ",
       "artifact": "test/pin.test.ts",
-      "passes": false,
-      "evidence": null
+      "passes": true,
+      "evidence": {
+        "exit": 0,
+        "log": ".closeout/logs/C10-1790497833.txt",
+        "expect_ok": true,
+        "artifact_ok": true,
+        "ts": 1790497833
+      }
     },
     {
       "id": "C11",
@@ -124,8 +184,14 @@
       "proof": "node --test --test-reporter=spec --test-name-pattern='^B11 ' test/pin.test.ts",
       "expect": "✔ B11 ",
       "artifact": "test/pin.test.ts",
-      "passes": false,
-      "evidence": null
+      "passes": true,
+      "evidence": {
+        "exit": 0,
+        "log": ".closeout/logs/C11-1790497833.txt",
+        "expect_ok": true,
+        "artifact_ok": true,
+        "ts": 1790497834
+      }
     },
     {
       "id": "C12",
@@ -133,8 +199,14 @@
       "proof": "node --test --test-reporter=spec --test-name-pattern='^B12 ' test/pin.test.ts",
       "expect": "✔ B12 ",
       "artifact": "test/pin.test.ts",
-      "passes": false,
-      "evidence": null
+      "passes": true,
+      "evidence": {
+        "exit": 0,
+        "log": ".closeout/logs/C12-1790497834.txt",
+        "expect_ok": true,
+        "artifact_ok": true,
+        "ts": 1790497834
+      }
     },
     {
       "id": "C13",
@@ -142,8 +214,14 @@
       "proof": "node --test --test-reporter=spec --test-name-pattern='^B13 ' test/pin.test.ts",
       "expect": "✔ B13 ",
       "artifact": "test/pin.test.ts",
-      "passes": false,
-      "evidence": null
+      "passes": true,
+      "evidence": {
+        "exit": 0,
+        "log": ".closeout/logs/C13-1790497834.txt",
+        "expect_ok": true,
+        "artifact_ok": true,
+        "ts": 1790497834
+      }
     },
     {
       "id": "C14",
@@ -151,8 +229,14 @@
       "proof": "node --test --test-reporter=spec --test-name-pattern='^B14 ' test/pin.test.ts",
       "expect": "✔ B14 ",
       "artifact": "test/pin.test.ts",
-      "passes": false,
-      "evidence": null
+      "passes": true,
+      "evidence": {
+        "exit": 0,
+        "log": ".closeout/logs/C14-1790497834.txt",
+        "expect_ok": true,
+        "artifact_ok": true,
+        "ts": 1790497835
+      }
     },
     {
       "id": "C15",
@@ -160,8 +244,14 @@
       "proof": "node --test --test-reporter=spec --test-name-pattern='^B15 ' test/pin.test.ts",
       "expect": "✔ B15 ",
       "artifact": "test/pin.test.ts",
-      "passes": false,
-      "evidence": null
+      "passes": true,
+      "evidence": {
+        "exit": 0,
+        "log": ".closeout/logs/C15-1790497835.txt",
+        "expect_ok": true,
+        "artifact_ok": true,
+        "ts": 1790497835
+      }
     },
     {
       "id": "C16",
@@ -169,8 +259,14 @@
       "proof": "node --test --test-reporter=spec --test-name-pattern='^B16 ' test/pin.test.ts",
       "expect": "✔ B16 ",
       "artifact": "test/pin.test.ts",
-      "passes": false,
-      "evidence": null
+      "passes": true,
+      "evidence": {
+        "exit": 0,
+        "log": ".closeout/logs/C16-1790497835.txt",
+        "expect_ok": true,
+        "artifact_ok": true,
+        "ts": 1790497835
+      }
     },
     {
       "id": "C17",
@@ -178,8 +274,14 @@
       "proof": "node --test --test-reporter=spec test/",
       "expect": "✔ B16 ",
       "artifact": "test/pin.test.ts",
-      "passes": false,
-      "evidence": null
+      "passes": true,
+      "evidence": {
+        "exit": 0,
+        "log": ".closeout/logs/C17-1790497835.txt",
+        "expect_ok": true,
+        "artifact_ok": true,
+        "ts": 1790497841
+      }
     }
   ]
 }
