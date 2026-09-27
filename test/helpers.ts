@@ -124,6 +124,46 @@ export function writeSession(sb: Sandbox, s: SessionFixture): string {
   return file;
 }
 
+export interface TranscriptRecord {
+  type: 'user' | 'assistant';
+  uuid: string;
+  parentUuid: string | null;
+  text: string;
+}
+
+// Appends UUID-shaped user/assistant records to a session file; timestamps ascend in file order.
+export function appendTranscript(
+  sb: Sandbox,
+  s: { id: string; cwd: string; configDir?: string },
+  records: TranscriptRecord[],
+): string {
+  const configDir = s.configDir ?? sb.configDir;
+  const dir = path.join(configDir, 'projects', projectDirName(s.cwd));
+  fs.mkdirSync(dir, { recursive: true });
+  const file = path.join(dir, `${s.id}.jsonl`);
+  const existing = fs.existsSync(file) ? fs.readFileSync(file, 'utf8').split('\n').filter((l) => l !== '').length : 0;
+  const base = Date.parse('2026-09-20T10:00:00.000Z');
+  let out = '';
+  records.forEach((r, i) => {
+    const line = {
+      type: r.type,
+      uuid: r.uuid,
+      parentUuid: r.parentUuid,
+      sessionId: s.id,
+      cwd: s.cwd,
+      timestamp: new Date(base + (existing + i) * 60_000).toISOString(),
+      isSidechain: false,
+      message:
+        r.type === 'user'
+          ? { role: 'user', content: r.text }
+          : { role: 'assistant', content: [{ type: 'text', text: r.text }] },
+    };
+    out += JSON.stringify(line) + '\n';
+  });
+  fs.appendFileSync(file, out);
+  return file;
+}
+
 export function run(
   sb: Sandbox,
   args: string[],
@@ -152,6 +192,7 @@ export interface StoreRecord {
   cwd: string;
   createdAt: string;
   lastOpenedAt: string | null;
+  leafUuid?: string;
 }
 
 export interface StoreFile {

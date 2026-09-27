@@ -47,6 +47,7 @@ describe('C2 add', () => {
           cwd: cwdA,
           createdAt,
           lastOpenedAt: null,
+          leafUuid: 'a1',
         },
       ],
     });
@@ -78,8 +79,8 @@ describe('C2 add', () => {
     const a = byId.get(UUID_A);
     const b = byId.get(UUID_B);
     assert.ok(a && b);
-    assert.deepEqual(a, { id: UUID_A, name: 'Auth fix', tags: [], note: '', cwd: cwdA, createdAt: a.createdAt, lastOpenedAt: null });
-    assert.deepEqual(b, { id: UUID_B, name: 'fix the auth refresh bug', tags: [], note: '', cwd: cwdB, createdAt: b.createdAt, lastOpenedAt: null });
+    assert.deepEqual(a, { id: UUID_A, name: 'Auth fix', tags: [], note: '', cwd: cwdA, createdAt: a.createdAt, lastOpenedAt: null, leafUuid: 'a1' });
+    assert.deepEqual(b, { id: UUID_B, name: 'fix the auth refresh bug', tags: [], note: '', cwd: cwdB, createdAt: b.createdAt, lastOpenedAt: null, leafUuid: 'a1' });
     assert.match(b.createdAt, ISO_RE);
     assert.deepEqual(fs.readdirSync(sb.storeDir), ['bookmarks.json']);
   });

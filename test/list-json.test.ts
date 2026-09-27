@@ -51,6 +51,7 @@ describe('C6 list json', () => {
             cwd: cwdB,
             createdAt: b.createdAt,
             lastOpenedAt: null,
+            leafUuid: 'a1',
             status: 'ready',
             summary: 'write docs for install',
           },
@@ -62,6 +63,7 @@ describe('C6 list json', () => {
             cwd: cwdA,
             createdAt: a.createdAt,
             lastOpenedAt: null,
+            leafUuid: 'a1',
             status: 'ready',
             summary: 'fix the auth refresh bug',
           },
@@ -88,6 +90,7 @@ describe('C6 list json', () => {
       cwd: cwdB,
       createdAt: record(sb, UUID_B).createdAt,
       lastOpenedAt: null,
+      leafUuid: 'a1',
       status: 'missing',
       summary: null,
     });
