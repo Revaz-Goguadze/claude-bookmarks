@@ -1,0 +1,185 @@
+{
+  "version": 1,
+  "objective": "cbm add pins the branch being worked on and cbm open always resumes that branch, resuming normally when it is still current and otherwise copying it into a new session via the SDK forkSession and repointing the bookmark, without ever modifying the source transcript.",
+  "in_scope": [
+    "src/store.ts: optional leafUuid on Bookmark, accepted by the store validator",
+    "src/cli.ts add: record leafUuid from getSessionMessages(id, {includeSystemMessages: true})",
+    "src/cli.ts open: stale-pin detection, forkSession copy to the pin's newest descendant, repoint, --print-command and --fork mapping (helpers may live in new src/branch.ts)",
+    "README.md: pinning paragraph naming leafUuid",
+    "test/pin.test.ts (new), test/add.test.ts and test/list-json.test.ts updated for leafUuid 'a1', test/helpers.ts transcript writer"
+  ],
+  "out_scope": [
+    "list, sessions, edit, remove behaviour, flags, usage text and exit codes: pinning is invisible outside add and open",
+    "Backfilling pins for old bookmarks or a --leaf flag: plan keeps old records unchanged",
+    "Store version bump, new dependencies, npm publish, Claude Code changes",
+    "Deleting or rewriting any .jsonl, or cleaning up earlier copies"
+  ],
+  "forbidden": [
+    "Declare done without a green closeout_check.py run in this session",
+    "Set items[].passes = true yourself — the checker owns that field",
+    "Delete, skip, or weaken tests to make a proof pass",
+    "Leave TODO / FIXME / NotImplemented / pass-stubs in in-scope files",
+    "Say 'follow-up PR' or 'you can run this later' for in-scope work",
+    "git push, deploy, drop, rm -rf, send mail, or any irreversible action"
+  ],
+  "budget": {
+    "max_iterations": 15,
+    "max_identical_fails": 3,
+    "timeout_sec": 180
+  },
+  "items": [
+    {
+      "id": "C1",
+      "requirement": "B1 `cbm add` on a `writeSession` fixture stores the 7 old fields plus `leafUuid: 'a1'`, and `cbm list --json` shows `leafUuid: 'a1'` on that bookmark.",
+      "proof": "node --test --test-reporter=spec --test-name-pattern='^B1 ' test/pin.test.ts",
+      "expect": "✔ B1 ",
+      "artifact": "test/pin.test.ts",
+      "passes": false,
+      "evidence": null
+    },
+    {
+      "id": "C2",
+      "requirement": "B2 `cbm add` on a session whose file holds branch A then branch B stores `leafUuid` = a6.",
+      "proof": "node --test --test-reporter=spec --test-name-pattern='^B2 ' test/pin.test.ts",
+      "expect": "✔ B2 ",
+      "artifact": "test/pin.test.ts",
+      "passes": false,
+      "evidence": null
+    },
+    {
+      "id": "C3",
+      "requirement": "B3 A store record without `leafUuid` opens with argv `--resume <id>`. No new .jsonl appears, and afterwards the record still has no `leafUuid` key and only `lastOpenedAt` changed.",
+      "proof": "node --test --test-reporter=spec --test-name-pattern='^B3 ' test/pin.test.ts",
+      "expect": "✔ B3 ",
+      "artifact": "test/pin.test.ts",
+      "passes": false,
+      "evidence": null
+    },
+    {
+      "id": "C4",
+      "requirement": "B4 Pinned at a4, then u7 then a8 appended under a4: `open` runs `--resume <id>`, no new .jsonl appears, and `id` and `leafUuid` are unchanged.",
+      "proof": "node --test --test-reporter=spec --test-name-pattern='^B4 ' test/pin.test.ts",
+      "expect": "✔ B4 ",
+      "artifact": "test/pin.test.ts",
+      "passes": false,
+      "evidence": null
+    },
+    {
+      "id": "C5",
+      "requirement": "B5 Two-branch `open` exits with the fake claude's code, and argv is `--resume <newId>` in the bookmark cwd. newId is a lowercase UUID different from id. The project dir holds exactly `<id>.jsonl` and `<newId>.jsonl`, and the source is byte-identical.",
+      "proof": "node --test --test-reporter=spec --test-name-pattern='^B5 ' test/pin.test.ts",
+      "expect": "✔ B5 ",
+      "artifact": "test/pin.test.ts",
+      "passes": false,
+      "evidence": null
+    },
+    {
+      "id": "C6",
+      "requirement": "B6 In B5's new file every record's `sessionId` is newId. Its user and assistant texts in order are the root prompt, root reply, A prompt and A reply. The last user/assistant record has `forkedFrom` `{sessionId:<id>, messageUuid:a4}`. A `custom-title` record has `customTitle` equal to the bookmark name, and the file mode is 0600.",
+      "proof": "node --test --test-reporter=spec --test-name-pattern='^B6 ' test/pin.test.ts",
+      "expect": "✔ B6 ",
+      "artifact": "test/pin.test.ts",
+      "passes": false,
+      "evidence": null
+    },
+    {
+      "id": "C7",
+      "requirement": "B7 After B5 the record deep-equals the old record with `id: newId`, `leafUuid` = uuid of the new file's last user/assistant record, and `lastOpenedAt` an ISO time in the test window. Stderr contains id and newId.",
+      "proof": "node --test --test-reporter=spec --test-name-pattern='^B7 ' test/pin.test.ts",
+      "expect": "✔ B7 ",
+      "artifact": "test/pin.test.ts",
+      "passes": false,
+      "evidence": null
+    },
+    {
+      "id": "C8",
+      "requirement": "B8 A second `open` after B5 runs `--resume <newId>`, the project dir still holds exactly 2 .jsonl files, and the store's `id` stays newId.",
+      "proof": "node --test --test-reporter=spec --test-name-pattern='^B8 ' test/pin.test.ts",
+      "expect": "✔ B8 ",
+      "artifact": "test/pin.test.ts",
+      "passes": false,
+      "evidence": null
+    },
+    {
+      "id": "C9",
+      "requirement": "B9 Pinned at a4, then u7 then a8 under a4, then branch B appended: `open` copies up to a8. The new file's last user/assistant record has `forkedFrom.messageUuid` = a8, and its texts include both A exchanges.",
+      "proof": "node --test --test-reporter=spec --test-name-pattern='^B9 ' test/pin.test.ts",
+      "expect": "✔ B9 ",
+      "artifact": "test/pin.test.ts",
+      "passes": false,
+      "evidence": null
+    },
+    {
+      "id": "C10",
+      "requirement": "B10 Two-branch `open --print-command` exits 0, stdout is exactly `cd '<cwd>' && '<fakeBin>' --resume <newId>\\n`, the fake claude does not run, the record has `id` newId and `lastOpenedAt` null, and a second `--print-command` prints the same line without creating a third .jsonl.",
+      "proof": "node --test --test-reporter=spec --test-name-pattern='^B10 ' test/pin.test.ts",
+      "expect": "✔ B10 ",
+      "artifact": "test/pin.test.ts",
+      "passes": false,
+      "evidence": null
+    },
+    {
+      "id": "C11",
+      "requirement": "B11 Two-branch `open --fork` runs argv `--resume <newId> --fork-session`.",
+      "proof": "node --test --test-reporter=spec --test-name-pattern='^B11 ' test/pin.test.ts",
+      "expect": "✔ B11 ",
+      "artifact": "test/pin.test.ts",
+      "passes": false,
+      "evidence": null
+    },
+    {
+      "id": "C12",
+      "requirement": "B12 With `leafUuid` hand-set to a uuid absent from the file, `open` runs `--resume <id>`, stderr contains `warning`, no new .jsonl appears, and the store is byte-identical except `lastOpenedAt`.",
+      "proof": "node --test --test-reporter=spec --test-name-pattern='^B12 ' test/pin.test.ts",
+      "expect": "✔ B12 ",
+      "artifact": "test/pin.test.ts",
+      "passes": false,
+      "evidence": null
+    },
+    {
+      "id": "C13",
+      "requirement": "B13 Two-branch with the bookmark cwd removed: `open` exits 3, no new .jsonl appears, and the store is byte-identical.",
+      "proof": "node --test --test-reporter=spec --test-name-pattern='^B13 ' test/pin.test.ts",
+      "expect": "✔ B13 ",
+      "artifact": "test/pin.test.ts",
+      "passes": false,
+      "evidence": null
+    },
+    {
+      "id": "C14",
+      "requirement": "B14 Two-branch with the project dir chmod 0555: `open` exits 1 with stderr starting `cbm: `, the fake claude does not run, no new .jsonl appears, and the store is byte-identical.",
+      "proof": "node --test --test-reporter=spec --test-name-pattern='^B14 ' test/pin.test.ts",
+      "expect": "✔ B14 ",
+      "artifact": "test/pin.test.ts",
+      "passes": false,
+      "evidence": null
+    },
+    {
+      "id": "C15",
+      "requirement": "B15 A store record with `\"leafUuid\": 5` makes `cbm list` exit 1 with stderr containing `store`, and the file is byte-identical.",
+      "proof": "node --test --test-reporter=spec --test-name-pattern='^B15 ' test/pin.test.ts",
+      "expect": "✔ B15 ",
+      "artifact": "test/pin.test.ts",
+      "passes": false,
+      "evidence": null
+    },
+    {
+      "id": "C16",
+      "requirement": "B16 README.md contains `leafUuid`.",
+      "proof": "node --test --test-reporter=spec --test-name-pattern='^B16 ' test/pin.test.ts",
+      "expect": "✔ B16 ",
+      "artifact": "test/pin.test.ts",
+      "passes": false,
+      "evidence": null
+    },
+    {
+      "id": "C17",
+      "requirement": "B17 `node --test test/` passes in full, including the updated add and list-json tests.",
+      "proof": "node --test --test-reporter=spec test/",
+      "expect": "✔ B16 ",
+      "artifact": "test/pin.test.ts",
+      "passes": false,
+      "evidence": null
+    }
+  ]
+}

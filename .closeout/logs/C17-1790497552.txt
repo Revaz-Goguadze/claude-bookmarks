@@ -1,0 +1,132 @@
+▶ C3 add errors
+  ✔ add not-a-uuid exits 2 and creates no store (354.172597ms)
+  ✔ add not-a-uuid with an existing store leaves it byte-identical (701.412715ms)
+  ✔ add of an unknown session uuid exits 4 and creates no store (347.64238ms)
+  ✔ add of an unknown session uuid with an existing store leaves it byte-identical (546.954171ms)
+  ✔ re-adding an already bookmarked session exits 6 and leaves the store byte-identical (499.928203ms)
+  ✔ re-adding a bookmarked session given in uppercase exits 6 (435.295807ms)
+  ✔ a new session named AUTH FIX when Auth fix exists exits 6 and leaves the store byte-identical (435.860785ms)
+  ✔ a name containing an ESC control char exits 2 and leaves the store byte-identical (384.142892ms)
+  ✔ a name containing an ESC control char on no store exits 2 and creates no store (195.459647ms)
+✔ C3 add errors (3910.528164ms)
+▶ C2 add
+  ✔ add with uppercase uuid, name, tags and note stores one normalized record (344.493371ms)
+  ✔ store file is pretty-printed JSON with mode 0600 and the store dir holds no other file (367.353127ms)
+  ✔ add of a second session without --name stores the SDK summary as the name (696.324341ms)
+✔ C2 add (1409.961939ms)
+▶ C1 cli
+  ✔ package.json is an ES module with the cbm bin and only the pinned SDK dependency (1.837218ms)
+  ✔ src/cli.ts starts with a node shebang (1.001449ms)
+  ✔ --help exits 0 and names all six commands on stdout (361.468399ms)
+  ✔ unknown command frob exits 2 with a cbm: error on stderr (342.381731ms)
+  ✔ unknown flag is a usage error exiting 2 (341.149815ms)
+  ✔ no arguments prints usage naming the commands on stderr and exits 2 (365.570836ms)
+✔ C1 cli (1415.201061ms)
+▶ R1 default name
+  ✔ a session whose summary is a slash command gets "session <id prefix>" instead (358.219571ms)
+  ✔ a normal prompt summary is still used as the name (359.270107ms)
+✔ R1 default name (719.017556ms)
+▶ C12 edit
+  ✔ --name renames the bookmark (1082.437666ms)
+  ✔ --add-tag "#New" adds the normalized tag new (905.017206ms)
+  ✔ --rm-tag auth removes that tag (702.150308ms)
+  ✔ --note "" clears the note (642.690376ms)
+  ✔ renaming onto another bookmark name in other case exits 6 and leaves the store byte-identical (577.850481ms)
+  ✔ edit with no change flag exits 2 and leaves the store byte-identical (537.345522ms)
+  ✔ edit leaves the other bookmark untouched (539.506623ms)
+✔ C12 edit (4990.085956ms)
+▶ C14 json errors
+  ✔ list --json on a corrupt store prints one store_corrupt error line and exits 1 (357.098878ms)
+  ✔ sessions --json --limit abc prints one usage error line and exits 2 (383.376748ms)
+  ✔ list --json on an empty store prints ok:true with no bookmarks (333.737785ms)
+  ✔ list --json with no store prints ok:true with no bookmarks and creates no store (361.625673ms)
+✔ C14 json errors (1437.730333ms)
+▶ C6 list json
+  ✔ list --json returns ok:true with every documented bookmark field (1077.481655ms)
+  ✔ a bookmark whose session .jsonl was deleted shows missing with null summary and stays in the store (1155.794559ms)
+✔ C6 list json (2234.490283ms)
+▶ C5 list
+  ✔ each line shows name, [tags], ready, age and cwd (1421.910293ms)
+  ✔ query REFRESH matches by summary, tag, note word and name case-insensitively (1447.721957ms)
+  ✔ --tag filters to bookmarks carrying that tag (992.812127ms)
+  ✔ order is by max(lastOpenedAt, createdAt) descending (1350.047758ms)
+  ✔ no store prints a hint containing cbm add (171.055784ms)
+  ✔ an empty store prints a hint containing cbm add (178.652299ms)
+✔ C5 list (5563.918141ms)
+▶ C9 open errors
+  ✔ removed bookmark cwd exits 3 naming the cwd and --allow-missing-cwd without running claude (719.871207ms)
+  ✔ --allow-missing-cwd runs claude in cbm own cwd and warns on stderr (716.841977ms)
+  ✔ removed session .jsonl exits 4 without running claude and leaves lastOpenedAt unchanged (808.324331ms)
+  ✔ removed session .jsonl on a never-opened bookmark exits 4 and lastOpenedAt stays null (428.122431ms)
+  ✔ CBM_CLAUDE_BIN pointing at a nonexistent path exits 127 and leaves lastOpenedAt unchanged (433.087881ms)
+✔ C9 open errors (3107.958969ms)
+▶ C7 open
+  ✔ open "auth FIX" runs the claude bin with --resume <uuid> in the bookmark cwd and exits with its code (758.256766ms)
+  ✔ open leaves every other record field unchanged (681.53188ms)
+  ✔ --fork adds --fork-session after the uuid (574.214859ms)
+✔ C7 open (2015.787783ms)
+▶ C15 plugin
+  ✔ plugin.json has name session-bookmarks, version 0.1.0, a description and author Revaz G (1.549398ms)
+  ✔ bookmark.md frontmatter allows cbm and its body adds the current session from $ARGUMENTS (0.616678ms)
+  ✔ bookmarks.md frontmatter allows cbm and its body runs cbm list $ARGUMENTS (0.852219ms)
+  ✔ claude plugin validate plugin exits 0 with Validation passed (722.661223ms)
+✔ C15 plugin (727.1303ms)
+▶ C8 print command
+  ✔ --print-command prints the exact cd and resume line without running claude or touching lastOpenedAt (724.075788ms)
+  ✔ --print-command with --fork appends --fork-session (680.128926ms)
+  ✔ with CBM_CLAUDE_BIN unset the bin part is quoted claude (542.219735ms)
+  ✔ an embedded single quote in the cwd is written as a closed, escaped and reopened quote (500.685845ms)
+✔ C8 print command (2448.494233ms)
+▶ C16 readme
+  ✔ README.md mentions npm i --omit=optional (1.347749ms)
+  ✔ README.md mentions npm link (0.226264ms)
+  ✔ README.md mentions --plugin-dir (0.210675ms)
+  ✔ README.md mentions /bookmark (0.159439ms)
+  ✔ README.md mentions /bookmarks (0.129103ms)
+  ✔ README.md mentions CBM_STORE (0.113573ms)
+  ✔ README.md mentions CBM_CLAUDE_BIN (0.113864ms)
+  ✔ README.md mentions cbm add (0.144191ms)
+  ✔ README.md mentions cbm list (0.173746ms)
+  ✔ README.md mentions cbm open (3.003016ms)
+  ✔ README.md mentions cbm sessions (0.13863ms)
+  ✔ README.md mentions cbm edit (0.10619ms)
+  ✔ README.md mentions cbm remove (0.079429ms)
+✔ C16 readme (8.435943ms)
+▶ C13 remove
+  ✔ remove "auth fix" drops only that record and leaves its .jsonl byte-identical (1039.795546ms)
+  ✔ remove nosuch exits 5 and leaves the store byte-identical (928.757279ms)
+✔ C13 remove (1969.789476ms)
+▶ C10 select
+  ✔ exact name in any case resolves to its uuid (2139.322168ms)
+  ✔ full uuid resolves to that bookmark (870.529464ms)
+  ✔ a unique 8-char uuid prefix resolves in either case (980.19891ms)
+  ✔ an 8-char prefix shared by two bookmarks exits 2 listing both candidates and prints nothing on stdout (722.441012ms)
+  ✔ a 7-char prefix exits 5 (720.181667ms)
+  ✔ an unknown name exits 5 (682.048748ms)
+✔ C10 select (6116.43766ms)
+▶ C11 sessions
+  ✔ sessions --json lists all sessions newest first with documented fields and bookmark info (704.054457ms)
+  ✔ query refresh filters sessions by summary (891.92452ms)
+  ✔ --limit 1 returns only the newest session (501.546611ms)
+  ✔ human output shows [bookmarked: Auth fix] only on the bookmarked session line (442.502495ms)
+  ✔ --limit 0 is a usage error exiting 2 (414.668514ms)
+  ✔ --limit abc is a usage error exiting 2 (417.717514ms)
+✔ C11 sessions (3374.034361ms)
+▶ C4 store
+  ✔ with CBM_STORE unset add writes $CLAUDE_CONFIG_DIR/bookmarks.json (328.294138ms)
+  ✔ with CBM_STORE and CLAUDE_CONFIG_DIR unset add writes $HOME/.claude/bookmarks.json (291.308266ms)
+  ✔ list with no store exits 0 and creates no file (271.283247ms)
+  ✔ list with CBM_STORE unset and no store creates no bookmarks.json in the config dir (271.3386ms)
+  ✔ list on a store with invalid JSON exits 1 mentioning store and leaves it byte-identical (240.381894ms)
+  ✔ add on a store with invalid JSON exits 1 mentioning store and leaves it byte-identical (247.575654ms)
+  ✔ list on a store with version 2 exits 1 mentioning store and leaves it byte-identical (205.0707ms)
+  ✔ add on a store with version 2 exits 1 mentioning store and leaves it byte-identical (217.278609ms)
+✔ C4 store (2074.466061ms)
+ℹ tests 90
+ℹ suites 17
+ℹ pass 90
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 6308.523185
